@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import UIKit
 
-final class StockDetailsViewController: BaseViewController<StocksDetailsViewModel> {
+final class StockDetailsViewController: UIViewController {
     // MARK: - Views
 //    private let contentView = StockDetailsView()
 

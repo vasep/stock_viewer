@@ -10,6 +10,6 @@ import Foundation
 import Foundation
 import UIKit
 
-class MyStocksViewController:BaseViewController<MyStocksViewModel> {
+class MyStocksViewController:UIViewController {
     
 }

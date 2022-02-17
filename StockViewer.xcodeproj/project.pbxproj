@@ -20,8 +20,15 @@
 		335AD98927BD6B9500194E9C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD98827BD6B9500194E9C /* BaseViewController.swift */; };
 		335AD98B27BD6BBE00194E9C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD98A27BD6BBE00194E9C /* ViewModel.swift */; };
 		335AD98E27BD6EE400194E9C /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD98D27BD6EE400194E9C /* TabbarViewController.swift */; };
+		335AD99027BE800D00194E9C /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD98F27BE800D00194E9C /* Extension+UIColor.swift */; };
+		335AD99227BE806200194E9C /* Extension+CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD99127BE806200194E9C /* Extension+CGFloat.swift */; };
+		335AD99427BE883100194E9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD99327BE883100194E9C /* SceneDelegate.swift */; };
+		335AD99627BE94ED00194E9C /* Extension+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD99527BE94ED00194E9C /* Extension+SnapKit.swift */; };
+		335AD99927BEA21000194E9C /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD99827BEA21000194E9C /* Stock.swift */; };
+		335AD99B27BEA46B00194E9C /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD99A27BEA46B00194E9C /* Extension+UIView.swift */; };
+		335AD99D27BEA4C200194E9C /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD99C27BEA4C200194E9C /* Extension+UIViewController.swift */; };
+		335AD99F27BEA84400194E9C /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335AD99E27BEA84400194E9C /* StockTableViewCell.swift */; };
 		33A202CD27BD60E00012976A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A202CC27BD60E00012976A /* AppDelegate.swift */; };
-		33A202CF27BD60E00012976A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A202CE27BD60E00012976A /* SceneDelegate.swift */; };
 		33A202D127BD60E00012976A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A202D027BD60E00012976A /* ViewController.swift */; };
 		33A202D427BD60E00012976A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33A202D227BD60E00012976A /* Main.storyboard */; };
 		33A202D727BD60E00012976A /* StockViewer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33A202D527BD60E00012976A /* StockViewer.xcdatamodeld */; };
@@ -45,9 +52,16 @@
 		335AD98827BD6B9500194E9C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		335AD98A27BD6BBE00194E9C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		335AD98D27BD6EE400194E9C /* TabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
+		335AD98F27BE800D00194E9C /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
+		335AD99127BE806200194E9C /* Extension+CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CGFloat.swift"; sourceTree = "<group>"; };
+		335AD99327BE883100194E9C /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		335AD99527BE94ED00194E9C /* Extension+SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+SnapKit.swift"; sourceTree = "<group>"; };
+		335AD99827BEA21000194E9C /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
+		335AD99A27BEA46B00194E9C /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		335AD99C27BEA4C200194E9C /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
+		335AD99E27BEA84400194E9C /* StockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
 		33A202C927BD60E00012976A /* StockViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33A202CC27BD60E00012976A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		33A202CE27BD60E00012976A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		33A202D027BD60E00012976A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		33A202D327BD60E00012976A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33A202D627BD60E00012976A /* StockViewer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StockViewer.xcdatamodel; sourceTree = "<group>"; };
@@ -81,8 +95,8 @@
 		335AD96827BD65B400194E9C /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				33A202CE27BD60E00012976A /* SceneDelegate.swift */,
 				33A202CC27BD60E00012976A /* AppDelegate.swift */,
+				335AD99327BE883100194E9C /* SceneDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -90,6 +104,7 @@
 		335AD96927BD65BC00194E9C /* BussinessLogic */ = {
 			isa = PBXGroup;
 			children = (
+				335AD99727BEA1FE00194E9C /* Models */,
 			);
 			path = BussinessLogic;
 			sourceTree = "<group>";
@@ -119,7 +134,6 @@
 		335AD96C27BD65E600194E9C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				33A202DD27BD60E30012976A /* Info.plist */,
 				33A202D827BD60E30012976A /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -168,6 +182,7 @@
 		335AD98327BD6A3200194E9C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				335AD99E27BEA84400194E9C /* StockTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,6 +190,11 @@
 		335AD98427BD6A3E00194E9C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				335AD98F27BE800D00194E9C /* Extension+UIColor.swift */,
+				335AD99127BE806200194E9C /* Extension+CGFloat.swift */,
+				335AD99527BE94ED00194E9C /* Extension+SnapKit.swift */,
+				335AD99A27BEA46B00194E9C /* Extension+UIView.swift */,
+				335AD99C27BEA4C200194E9C /* Extension+UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -192,6 +212,14 @@
 				335AD98D27BD6EE400194E9C /* TabbarViewController.swift */,
 			);
 			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		335AD99727BEA1FE00194E9C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				335AD99827BEA21000194E9C /* Stock.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		33A202C027BD60E00012976A = {
@@ -221,6 +249,7 @@
 				335AD96B27BD65DC00194E9C /* Presentation */,
 				335AD96C27BD65E600194E9C /* Resources */,
 				33A202D027BD60E00012976A /* ViewController.swift */,
+				33A202DD27BD60E30012976A /* Info.plist */,
 				33A202D227BD60E00012976A /* Main.storyboard */,
 				33A202DA27BD60E30012976A /* LaunchScreen.storyboard */,
 				33A202D527BD60E00012976A /* StockViewer.xcdatamodeld */,
@@ -248,6 +277,7 @@
 				33A202C527BD60E00012976A /* Sources */,
 				33A202C627BD60E00012976A /* Frameworks */,
 				33A202C727BD60E00012976A /* Resources */,
+				B027F9C95FEBD85184EECE1D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -327,6 +357,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B027F9C95FEBD85184EECE1D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StockViewer/Pods-StockViewer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StockViewer/Pods-StockViewer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StockViewer/Pods-StockViewer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -334,22 +381,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335AD99227BE806200194E9C /* Extension+CGFloat.swift in Sources */,
 				335AD97F27BD694A00194E9C /* StocksDetailsViewModel.swift in Sources */,
 				33A202D127BD60E00012976A /* ViewController.swift in Sources */,
 				33A202CD27BD60E00012976A /* AppDelegate.swift in Sources */,
+				335AD99B27BEA46B00194E9C /* Extension+UIView.swift in Sources */,
 				335AD98127BD695500194E9C /* StockDetailsViewController.swift in Sources */,
 				335AD97927BD692000194E9C /* MyStocksViewModel.swift in Sources */,
 				335AD98927BD6B9500194E9C /* BaseViewController.swift in Sources */,
 				335AD98B27BD6BBE00194E9C /* ViewModel.swift in Sources */,
 				335AD98E27BD6EE400194E9C /* TabbarViewController.swift in Sources */,
+				335AD99F27BEA84400194E9C /* StockTableViewCell.swift in Sources */,
 				335AD97527BD690800194E9C /* HomeViewModel.swift in Sources */,
 				33A202D727BD60E00012976A /* StockViewer.xcdatamodeld in Sources */,
 				335AD97127BD68EC00194E9C /* HomeView.swift in Sources */,
+				335AD99027BE800D00194E9C /* Extension+UIColor.swift in Sources */,
 				335AD97727BD691400194E9C /* MyStocksView.swift in Sources */,
-				33A202CF27BD60E00012976A /* SceneDelegate.swift in Sources */,
 				335AD97327BD68FA00194E9C /* HomeViewController.swift in Sources */,
 				335AD98727BD6B6C00194E9C /* BaseView.swift in Sources */,
+				335AD99627BE94ED00194E9C /* Extension+SnapKit.swift in Sources */,
+				335AD99927BEA21000194E9C /* Stock.swift in Sources */,
+				335AD99427BE883100194E9C /* SceneDelegate.swift in Sources */,
 				335AD97D27BD694000194E9C /* StockDetailsView.swift in Sources */,
+				335AD99D27BEA4C200194E9C /* Extension+UIViewController.swift in Sources */,
 				335AD97B27BD692A00194E9C /* MyStocksViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
