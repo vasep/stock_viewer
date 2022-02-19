@@ -9,22 +9,16 @@ import Foundation
 import UIKit
 import SnapKit
 
-struct StockMockUp {
-    var name:String?
-}
-
 protocol HomeViewDelegate: NSObjectProtocol {
-    func didSelectStock(stock:StockMockUp)
+    func didSelectStock(stock:StockModel)
     func didChangeSearchString(string:String)
     func refreshData()
-
 }
 
 final class HomeView: UIView,UISearchBarDelegate {
     weak var delegate:HomeViewDelegate!
     var isFavoriteStocks = false
-    var responseStocks = [Stock]()
-    var responseStockMockUp = [StockMockUp]()
+    var responseStocks = [StockModel]()
     let searchTextField = UISearchBar()
 
     
@@ -57,15 +51,17 @@ final class HomeView: UIView,UISearchBarDelegate {
         
     }
     
-    func createMockUpModel(){
-        for i in 1...11 {
-            responseStockMockUp.append(StockMockUp(name: "AAPL"))
-        }
+    func setModel(responseStock: [StockModel]){
+        self.responseStocks = responseStock
+        self.tableView.reloadData()
+    }
+    
+    func setCountryFilterModel(){
+        
     }
     
     func setup(isFavorite:Bool){
         self.isFavoriteStocks = isFavorite
-        createMockUpModel()
         self.backgroundColor = UIColor.white        
 
         if !isFavorite {
@@ -125,18 +121,18 @@ final class HomeView: UIView,UISearchBarDelegate {
 //MARK: TableView Extensions
 extension HomeView:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return responseStockMockUp.count
+        return responseStocks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = responseStockMockUp[indexPath.row]
+        let model = responseStocks[indexPath.row]
         let cell = StockTableViewCell(style: .default, reuseIdentifier: StockTableViewCell.identifier, model:model,isFavorite: isFavoriteStocks )
         cell.delegate = self
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate.didSelectStock(stock: responseStockMockUp[indexPath.row])
+        delegate.didSelectStock(stock: responseStocks[indexPath.row])
     }
     
 }
@@ -161,11 +157,11 @@ extension HomeView {
 }
 
 extension HomeView:StockTableViewCellDelegate {
-    func addFavoriteStockAction(restaurant: Stock) {
+    func addFavoriteStockAction(restaurant: StockModel) {
         print()
     }
     
-    func deleteFavoriteRestaurantAction(restaurant: Stock) {
+    func deleteFavoriteRestaurantAction(restaurant: StockModel) {
         print()
     }
     

@@ -11,6 +11,11 @@ import UIKit
 class HomeViewController:UIViewController,UIViewControllerTransitioningDelegate {
     var isFavStocks = false
     
+    lazy var modelView: HomeViewModel = {
+        var m = HomeViewModel(c: self, s: #selector(self.getStocksFromServier))
+        return m
+    }()
+    
     lazy var homeView:HomeView = {
         var v = HomeView()
         v.delegate = self
@@ -29,27 +34,32 @@ class HomeViewController:UIViewController,UIViewControllerTransitioningDelegate 
         } else {
             homeView.setup(isFavorite: false)
         }
+        getStocksFromServier()
         self.hideKeyboardWhenTappedAround()
  }
     
+    @objc func getStocksFromServier(){
+        modelView.fetchStocks()
+//        modelView.createFilterModel()
+    }
 }
 
 extension HomeViewController: HomeViewDelegate {
-    func didSelectStock(stock: StockMockUp) {
-        print()
-    }
-    
-    func didSelectStock(stock: Stock) {
-        print()
+    func didSelectStock(stock: StockModel) {
+        modelView.goToDetailsController(selectedStock: stock)
     }
     
     func didChangeSearchString(string: String) {
-        print()
+        modelView.refreshDataWithSearch(string: string)
     }
     
     func refreshData() {
-        print()
+        getStocksFromServier()
     }
-    
-    
+}
+
+extension HomeViewController: HomeViewModelDelegate {
+    func getStocks(result: [StockModel]) {
+        homeView.setModel(responseStock: result)
+    }
 }

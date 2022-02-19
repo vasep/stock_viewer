@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 
 protocol StockTableViewCellDelegate:NSObjectProtocol{
-    func addFavoriteStockAction(restaurant:Stock)
-    func deleteFavoriteRestaurantAction(restaurant:Stock)
+    func addFavoriteStockAction(restaurant:StockModel)
+    func deleteFavoriteRestaurantAction(restaurant:StockModel)
 }
 
 class StockTableViewCell: UITableViewCell {
     weak var delegate: StockTableViewCellDelegate?
-    var model:StockMockUp!
+    var model:StockModel!
     var isFavorite = false
     static var identifier = "StockTableViewCell"
     
@@ -29,7 +29,7 @@ class StockTableViewCell: UITableViewCell {
     lazy var stockName: UILabel = {
         var l = UILabel()
         l.textColor = UIColor(red:0.32, green:0.18, blue:0.12, alpha:1.0)
-        l.text = self.model.name
+        l.text = self.model.companyName
         l.font = UIFont.systemFont(ofSize: 11,weight: .light)
         l.textAlignment = .left
         l.numberOfLines = 0
@@ -38,7 +38,7 @@ class StockTableViewCell: UITableViewCell {
         return l
     }()
     
-    init(style: UITableViewCell.CellStyle, reuseIdentifier: String?, model:StockMockUp, isFavorite:Bool ) {
+    init(style: UITableViewCell.CellStyle, reuseIdentifier: String?, model:StockModel, isFavorite:Bool ) {
         super.init(style: .default, reuseIdentifier: StockTableViewCell.identifier)
         self.selectionStyle = .none
         self.model = model
@@ -60,7 +60,6 @@ class StockTableViewCell: UITableViewCell {
         addImage.snp.makeConstraints {(c) in
             c.right.equalToSuperview().inset(20)
             c.bottom.top.equalToSuperview()
-
         }
     }
     

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Stock : Codable {
+struct StockModel : Codable {
     let symbol : String?
     let companyName : String?
     let marketCap : Int?

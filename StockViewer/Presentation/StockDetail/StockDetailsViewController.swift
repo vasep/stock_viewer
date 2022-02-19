@@ -9,14 +9,45 @@ import Foundation
 import UIKit
 
 final class StockDetailsViewController: UIViewController {
-    // MARK: - Views
-//    private let contentView = StockDetailsView()
+    
+    var selectedStockTickerName : String!
+    
+    lazy var modelView: StocksDetailsViewModel = {
+        var m = StocksDetailsViewModel(c: self, s: #selector(self.getStocksFromServier))
+        return m
+    }()
+    
+    lazy var stockView:StockDetailsView = {
+        var v = StockDetailsView(tickerName: selectedStockTickerName)
+        v.delegate = self
+        return v
+    }()
 
-    // MARK: - Lifecycle
     override func loadView() {
+        view = stockView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.white
+        stockView.setup()
+        getStocksFromServier()
     }
+    
+    @objc func getStocksFromServier(){
+        modelView.fetchNewsForStock(ticker: selectedStockTickerName)
+    }
+}
+
+extension StockDetailsViewController: StockDetailDelegate {
+    func dismissView() {
+        self.dismiss(animated: true)
+    }
+}
+
+extension StockDetailsViewController: StocksDetailsViewModelDelegate {
+    func getStockNews(result: [StockNewsModel]) {
+        stockView.setModel(responseNews: result)
+    }
+    
 }
