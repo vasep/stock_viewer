@@ -1,4 +1,5 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.7.1)
   - Alamofire (5.4.4)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
@@ -10,23 +11,26 @@ PODS:
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0
   - Moya
   - SDWebImage/MapKit
   - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
   trunk:
+    - ActionSheetPicker-3.0
     - Alamofire
     - Moya
     - SDWebImage
     - SnapKit
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: 36da254b97a09ff89679ecb8b8510bd3e5bdc773
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   SDWebImage: 4ea20cca2986adc5aacde07aa686742fd4c67a37
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: b449e143818e6d3522086afe8d11ef355a02be3d
+PODFILE CHECKSUM: 48e34e2512c359427567fca962d25719c1bd6461
 
 COCOAPODS: 1.11.2

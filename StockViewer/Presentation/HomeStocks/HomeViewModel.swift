@@ -12,6 +12,7 @@ import Alamofire
 
 protocol HomeViewModelDelegate:NSObjectProtocol {
     func getStocks(result: [StockModel])
+    func getFilte(result: [String])
 }
 
 class HomeViewModel: NSObject {
@@ -20,7 +21,7 @@ class HomeViewModel: NSObject {
     private var selector:Selector
     weak var delegate:HomeViewModelDelegate!
     private var stockData = [StockModel]()
-
+    
     init(c:HomeViewController,s:Selector) {
         self.homeController = c
         self.selector = s
@@ -37,13 +38,41 @@ class HomeViewModel: NSObject {
         })
     }
     
+    func sortByMakertCap(){
+        var sortedArray = [StockModel]()
+        sortedArray = stockData.sorted{ $0.marketCap! > $1.marketCap! }
+        delegate.getStocks(result: sortedArray)
+    }
+    
+    func sortAlphabetically() {
+        var sortedArray = [StockModel]()
+        sortedArray = stockData.sorted{ $0.companyName! < $1.companyName! }
+        delegate.getStocks(result: sortedArray)
+    }
+    
+    func filterByCountry(country: String){
+        var filteredStockArray = [StockModel]()
+        for stock in stockData {
+            if stock.country!.contains(country) {
+                filteredStockArray.append(stock)
+            }
+        }
+        if country == "All" {
+            fetchStocks()
+        } else {
+            stockData = filteredStockArray
+            delegate.getStocks(result: filteredStockArray)
+        }
+    }
+    
     func createFilterModel(){
-        var countryArray = [String]()
+        var countryArray = ["All"]
         for stock in stockData {
             if !countryArray.contains(stock.country ?? "") {
                 countryArray.append(stock.country!)
             }
         }
+        self.delegate.getFilte(result: countryArray)
     }
     
     func refreshDataWithSearch(string:String){

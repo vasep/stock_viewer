@@ -45,6 +45,19 @@ class HomeViewController:UIViewController,UIViewControllerTransitioningDelegate 
 }
 
 extension HomeViewController: HomeViewDelegate {
+    
+    func didSelectSortAlphabetically() {
+        modelView.sortAlphabetically()
+    }
+    
+    func didSelectSortByMarketCap() {
+        modelView.sortByMakertCap()
+    }
+    
+    func didSelectCountryFilter(country: String) {
+        modelView.filterByCountry(country: country)
+    }
+    
     func didSelectStock(stock: StockModel) {
         modelView.goToDetailsController(selectedStock: stock)
     }
@@ -59,6 +72,10 @@ extension HomeViewController: HomeViewDelegate {
 }
 
 extension HomeViewController: HomeViewModelDelegate {
+    func getFilte(result: [String]) {
+        homeView.setFilterModel(result: result)
+    }
+    
     func getStocks(result: [StockModel]) {
         homeView.setModel(responseStock: result)
     }

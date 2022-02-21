@@ -8,10 +8,14 @@
 import Foundation
 import UIKit
 import SnapKit
+import ActionSheetPicker_3_0
 
 protocol HomeViewDelegate: NSObjectProtocol {
     func didSelectStock(stock:StockModel)
     func didChangeSearchString(string:String)
+    func didSelectCountryFilter(country:String)
+    func didSelectSortAlphabetically()
+    func didSelectSortByMarketCap()
     func refreshData()
 }
 
@@ -19,8 +23,8 @@ final class HomeView: UIView,UISearchBarDelegate {
     weak var delegate:HomeViewDelegate!
     var isFavoriteStocks = false
     var responseStocks = [StockModel]()
+    var filterModel = [String]()
     let searchTextField = UISearchBar()
-
     
     lazy var tableView:UITableView = {
         let t = UITableView()
@@ -48,7 +52,7 @@ final class HomeView: UIView,UISearchBarDelegate {
     }
     
     @objc func handleFilterBtnClick() {
-        
+        setupMainSheetPicker()
     }
     
     func setModel(responseStock: [StockModel]){
@@ -57,13 +61,16 @@ final class HomeView: UIView,UISearchBarDelegate {
     }
     
     func setCountryFilterModel(){
-        
+    }
+    
+    func setFilterModel(result:[String]){
+        self.filterModel = result
     }
     
     func setup(isFavorite:Bool){
         self.isFavoriteStocks = isFavorite
-        self.backgroundColor = UIColor.white        
-
+        self.backgroundColor = UIColor.white
+        
         if !isFavorite {
             self.addSubview(searchTextField)
             self.addSubview(filterBtn)
@@ -71,6 +78,52 @@ final class HomeView: UIView,UISearchBarDelegate {
         }
         self.addSubview(tableView)
         setupTableView()
+    }
+    
+    func sortAlphabetically() {
+        self.delegate.didSelectSortAlphabetically()
+    }
+    
+    func sortByMarketCap() {
+        self.delegate.didSelectSortByMarketCap()
+    }
+    
+    func setupFilterByCountrySheetPicker() {
+        ActionSheetStringPicker.show(withTitle: "Filter By Country",
+                                     rows: filterModel,
+                                     initialSelection: 1,
+                                     doneBlock: { picker, value, index in
+            
+            self.delegate.didSelectCountryFilter(country: self.filterModel[value])
+            
+            return
+        },
+                                     cancel: { picker in
+            return
+        },
+                                     origin: self)
+    }
+    
+    func setupMainSheetPicker() {
+        let stringActionPickerArray = ["Sort By Market Cap", "Sort Alphabetically", "Filter By Country", ]
+        ActionSheetStringPicker.show(withTitle: "Filters & Sorts",
+                                     rows: stringActionPickerArray,
+                                     initialSelection: 1,
+                                     doneBlock: { picker, value, index in
+            
+            if stringActionPickerArray[value] == "Sort By Market Cap" {
+                self.sortByMarketCap()
+            } else if stringActionPickerArray[value] == "Sort Alphabetically" {
+                self.sortAlphabetically()
+            } else if stringActionPickerArray[value] == "Filter By Country" {
+                self.setupFilterByCountrySheetPicker()
+            }
+            return
+        },
+                                     cancel: { picker in
+            return
+        },
+                                     origin: self)
     }
     
     func setupTableView(){
@@ -130,7 +183,7 @@ extension HomeView:UITableViewDelegate,UITableViewDataSource {
         cell.delegate = self
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate.didSelectStock(stock: responseStocks[indexPath.row])
     }
@@ -164,7 +217,5 @@ extension HomeView:StockTableViewCellDelegate {
     func deleteFavoriteRestaurantAction(restaurant: StockModel) {
         print()
     }
-    
-    
 }
 

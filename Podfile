@@ -7,6 +7,7 @@ target 'StockViewer' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'Moya'
   pod 'SDWebImage/MapKit'
+  pod 'ActionSheetPicker-3.0'
 
   # Pods for StockViewer
 
