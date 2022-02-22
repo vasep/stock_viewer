@@ -39,12 +39,26 @@ class HomeViewController:UIViewController,UIViewControllerTransitioningDelegate 
  }
     
     @objc func getStocksFromServier(){
-        modelView.fetchStocks()
-//        modelView.createFilterModel()
+        if isFavStocks {
+            modelView.fetchItemsFromDB()
+        } else {
+            modelView.fetchItemsFromDB()
+            modelView.fetchStocks()
+        }
     }
 }
 
 extension HomeViewController: HomeViewDelegate {
+    func refreshFavoriteData() {
+    }
+    
+    func didDeleteFavoriteStock(favstock: StockFavoriteModel) {
+        modelView.deleteItem(item: favstock)
+    }
+    
+    func didAddFavoriteStock(stock: StockModel) {
+        modelView.addItem(stock: stock)
+    }
     
     func didSelectSortAlphabetically() {
         modelView.sortAlphabetically()
@@ -58,7 +72,7 @@ extension HomeViewController: HomeViewDelegate {
         modelView.filterByCountry(country: country)
     }
     
-    func didSelectStock(stock: StockModel) {
+    func didSelectStock(stock: String) {
         modelView.goToDetailsController(selectedStock: stock)
     }
     
@@ -72,11 +86,19 @@ extension HomeViewController: HomeViewDelegate {
 }
 
 extension HomeViewController: HomeViewModelDelegate {
+    func updateFavModel(favorite: [StockFavoriteModel]) {
+        modelView.updateFavData()
+    }
+    
     func getFilte(result: [String]) {
         homeView.setFilterModel(result: result)
     }
     
     func getStocks(result: [StockModel]) {
         homeView.setModel(responseStock: result)
+    }
+    
+    func getFavoriteStocks(favorite:[StockFavoriteModel]){
+        homeView.setFavoriteModel(responseFavoriteModel: favorite)
     }
 }

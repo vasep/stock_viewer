@@ -23,8 +23,10 @@ class TabbarViewController: UITabBarController, UITabBarControllerDelegate {
         
         let homeViewController = HomeViewController()
         let homeNavigation = UINavigationController(rootViewController: homeViewController)
-        homeNavigation.tabBarItem.image = UIImage(systemName: "list.dash")
-//      homeNavigation.tabBarItem.selectedImage = R.image.activeNavigationButtonHome()
+        homeNavigation.tabBarItem.image = UIImage(systemName: "book")
+        homeNavigation.tabBarItem.selectedImage = UIImage(systemName: "book.fill")
+        homeViewController.isFavStocks = false
+
         homeNavigation.tabBarItem.setImageOnly()
         
         homeViewController.navigationController?.isNavigationBarHidden = true
@@ -34,7 +36,7 @@ class TabbarViewController: UITabBarController, UITabBarControllerDelegate {
         let myStocksNavigation = UINavigationController(rootViewController: myStocksViewController)
         myStocksNavigation.tabBarItem.image = UIImage(systemName: "heart")
         myStocksViewController.isFavStocks = true
-//      homeNavigation.tabBarItem.selectedImage = R.image.activeNavigationButtonHome()
+        myStocksNavigation.tabBarItem.selectedImage = UIImage(systemName: "heart.fill")
         myStocksNavigation.tabBarItem.setImageOnly()
         
         myStocksViewController.navigationController?.isNavigationBarHidden = true

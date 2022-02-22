@@ -16,7 +16,6 @@ final class StocksDetailsViewModel: NSObject {
     private var stockViewController : StockDetailsViewController
     private var selector:Selector
     weak var delegate:StocksDetailsViewModelDelegate!
-    
     private var newsSource = [StockNewsModel]()
 
     init(c:StockDetailsViewController,s:Selector) {
@@ -26,11 +25,15 @@ final class StocksDetailsViewModel: NSObject {
     }
     
     func fetchNewsForStock(ticker:String) {
-        Constatnt.ManagerApi.fetchStockNews(ticker: ticker, successBlock: { (news) in
-            self.delegate.getStockNews(result: news)
-        }, errorBlock: { (error) in
-            
-        })
+        DispatchQueue.main.async {
+            self.stockViewController.showActivityIndicator(viewController: self.stockViewController)
+            Constatnt.ManagerApi.fetchStockNews(ticker: ticker, successBlock: { (news) in
+                self.delegate.getStockNews(result: news)
+                self.stockViewController.hideActivityIndicator(viewController: self.stockViewController)
+            }, errorBlock: { (error) in
+                self.stockViewController.hideActivityIndicator(viewController: self.stockViewController)
+            })
+        }
     }
     
 }

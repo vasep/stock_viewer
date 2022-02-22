@@ -21,7 +21,7 @@ struct StockModel : Codable {
     let country : String?
     let isEtf : Bool?
     let isActivelyTrading : Bool?
-
+    var isFavorite = false
     enum CodingKeys: String, CodingKey {
 
         case symbol = "symbol"

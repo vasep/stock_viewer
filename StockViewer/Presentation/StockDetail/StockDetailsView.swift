@@ -19,6 +19,7 @@ final class StockDetailsView:UIView {
     
     lazy var navigationBar: UINavigationBar = {
         let navBar = UINavigationBar()
+        navBar.barTintColor = UIColor.white
         let navItem = UINavigationItem(title: selectedTickerName!)
         let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action:#selector(doneItemAction))
         navItem.leftBarButtonItem = doneItem

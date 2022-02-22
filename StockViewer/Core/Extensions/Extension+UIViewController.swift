@@ -19,4 +19,26 @@ public extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    public func showActivityIndicator (viewController : UIViewController){
+        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        activityIndicator.center = viewController.view.center
+        activityIndicator.color = UIColor.yellowColor
+        activityIndicator.startAnimating()
+        viewController.view.addSubview(activityIndicator)
+        activityIndicator.isHidden = false
+        viewController.view.isUserInteractionEnabled = false
+        
+    }
+
+    public func hideActivityIndicator (viewController : UIViewController ){
+        for subview in viewController.view.subviews as [UIView] {
+            if let activityIndicator = subview as? UIActivityIndicatorView {
+                activityIndicator.stopAnimating()
+                activityIndicator.isHidden = true
+                activityIndicator.removeFromSuperview()
+                viewController.view.isUserInteractionEnabled = true
+            }
+        }
+    }
 }
