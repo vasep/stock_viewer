@@ -17,8 +17,9 @@ protocol HomeViewDelegate: NSObjectProtocol {
     func didSelectSortAlphabetically()
     func didSelectSortByMarketCap()
     func didAddFavoriteStock(stock:StockModel)
-    func didDeleteFavoriteStock(favstock:StockFavoriteModel)
+    func didDeleteFavoriteStock(index:IndexPath)
     func refreshFavoriteData()
+    func configureModel(index: IndexPath)
     func refreshData()
 }
 
@@ -40,7 +41,7 @@ final class HomeView: UIView,UISearchBarDelegate {
     }()
     
     lazy var noFavoriteStocksLabel:UILabel = {
-       var l = UILabel()
+        var l = UILabel()
         l.textColor = UIColor.black
         l.font = UIFont.systemFont(ofSize: 22,weight: .light)
         l.textAlignment = .left
@@ -74,16 +75,11 @@ final class HomeView: UIView,UISearchBarDelegate {
     }
     
     func setFavoriteModel(responseFavoriteModel : [StockFavoriteModel]) {
-        
         self.respnseFavoriteStockModel = responseFavoriteModel
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-    }
-    
-    func updateFavModel(favorite:StockFavoriteModel){
-        
     }
     
     func setModel(responseStock: [StockModel]){
@@ -120,34 +116,34 @@ final class HomeView: UIView,UISearchBarDelegate {
         self.backgroundColor = UIColor.white
         
         if isFavorite {
-            if self.respnseFavoriteStockModel.count == 0 {
-                self.addSubview(noFavoriteStocksLabel)
-                setupNoFavsLbl()
-            } else {
+            if self.respnseFavoriteStockModel.count != 0 {
                 self.addSubview(tableView)
                 setupTableView()
+            } else {
+                setupNoFavsLbl()
             }
         } else {
             self.addSubview(searchTextField)
             self.addSubview(filterBtn)
-            setupSearchAndFilterElements()
             self.addSubview(tableView)
+            setupSearchAndFilterElements()
             setupTableView()
         }
     }
     
     func setupNoFavsLbl(){
+        self.addSubview(noFavoriteStocksLabel)
         noFavoriteStocksLabel.snp.makeConstraints { (c) in
             c.centerY.centerX.equalToSuperview()
         }
     }
     
     func sortAlphabetically() {
-        self.delegate.didSelectSortAlphabetically()
+        self.delegate?.didSelectSortAlphabetically()
     }
     
     func sortByMarketCap() {
-        self.delegate.didSelectSortByMarketCap()
+        self.delegate?.didSelectSortByMarketCap()
     }
     
     func setupFilterByCountrySheetPicker() {
@@ -156,7 +152,7 @@ final class HomeView: UIView,UISearchBarDelegate {
                                      initialSelection: 1,
                                      doneBlock: { picker, value, index in
             
-            self.delegate.didSelectCountryFilter(country: self.filterModel[value])
+            self.delegate?.didSelectCountryFilter(country: self.filterModel[value])
             
             return
         },
@@ -272,9 +268,9 @@ extension HomeView:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isFavoriteStocks{
-            delegate.didSelectStock(stock: respnseFavoriteStockModel[indexPath.row].symbom!)
+            delegate?.didSelectStock(stock: respnseFavoriteStockModel[indexPath.row].symbom!)
         }else {
-            delegate.didSelectStock(stock: responseStocks[indexPath.row].symbol!)
+            delegate?.didSelectStock(stock: responseStocks[indexPath.row].symbol!)
         }
     }
     
@@ -306,28 +302,19 @@ extension HomeView {
 //MARK: StockTableViewCellDelegate
 extension HomeView:StockTableViewCellDelegate {
     func addFavoriteStockAction(stock: StockModel, index: IndexPath) {
-        self.delegate.didAddFavoriteStock(stock: stock)
-        self.configureModel(index: index)
+        self.delegate?.didAddFavoriteStock(stock: stock)
+        self.delegate?.configureModel(index: index)
     }
     
     func deleteFavoriteStockAction(stock: StockFavoriteModel, index: IndexPath) {
-        self.delegate.didDeleteFavoriteStock(favstock: stock)
-        removeFavStockFromArray(index: index)
-    }
-    
-    
-    func configureModel(index:IndexPath){
-        self.responseStocks[index.row].isFavorite = true
-        self.delegate.refreshFavoriteData()
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    func removeFavStockFromArray(index:IndexPath) {
-        self.respnseFavoriteStockModel.remove(at: index.row)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+        self.delegate.didDeleteFavoriteStock(index: index)
+        if self.respnseFavoriteStockModel.count == 1 {
+            tableView.removeFromSuperview()
+            setupNoFavsLbl()
+        } else {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
 }

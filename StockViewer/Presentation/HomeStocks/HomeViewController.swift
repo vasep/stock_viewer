@@ -26,38 +26,46 @@ class HomeViewController:UIViewController,UIViewControllerTransitioningDelegate 
         view = homeView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
         if isFavStocks {
+            modelView.fetchItemsFromDB()
             homeView.setup(isFavorite: true)
         } else {
             homeView.setup(isFavorite: false)
         }
         getStocksFromServier()
         self.hideKeyboardWhenTappedAround()
- }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     @objc func getStocksFromServier(){
-        if isFavStocks {
-            modelView.fetchItemsFromDB()
-        } else {
-            modelView.fetchItemsFromDB()
-            modelView.fetchStocks()
-        }
+        modelView.fetchItemsFromDB()
+        modelView.fetchStocks()
     }
 }
 
 extension HomeViewController: HomeViewDelegate {
+    func didDeleteFavoriteStock(index: IndexPath) {
+        modelView.deleteItem(item: index)
+
+    }
+    
+    func configureModel(index: IndexPath) {
+        modelView.updateStockModel(index: index)
+    }
+    
     func refreshFavoriteData() {
     }
     
     func didDeleteFavoriteStock(favstock: StockFavoriteModel) {
-        modelView.deleteItem(item: favstock)
     }
     
     func didAddFavoriteStock(stock: StockModel) {
-        modelView.addItem(stock: stock)
+//        modelView.addItem(stock: stock)
     }
     
     func didSelectSortAlphabetically() {
@@ -86,14 +94,14 @@ extension HomeViewController: HomeViewDelegate {
 }
 
 extension HomeViewController: HomeViewModelDelegate {
-    func updateFavModel(favorite: [StockFavoriteModel]) {
-        modelView.updateFavData()
-    }
-    
-    func getFilte(result: [String]) {
+    func getFilter(result: [String]) {
         homeView.setFilterModel(result: result)
     }
     
+    func updateFavModel(favorite: [StockFavoriteModel]) {
+        print()
+    }
+
     func getStocks(result: [StockModel]) {
         homeView.setModel(responseStock: result)
     }

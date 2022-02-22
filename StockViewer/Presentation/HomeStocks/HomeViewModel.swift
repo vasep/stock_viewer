@@ -13,7 +13,7 @@ import CoreData
 
 protocol HomeViewModelDelegate:NSObjectProtocol {
     func getStocks(result: [StockModel])
-    func getFilte(result: [String])
+    func getFilter(result: [String])
     func getFavoriteStocks(favorite:[StockFavoriteModel])
     func updateFavModel(favorite:[StockFavoriteModel])
 }
@@ -36,14 +36,31 @@ class HomeViewModel: NSObject {
     func fetchStocks(){
         DispatchQueue.main.async {
             self.homeController.showActivityIndicator(viewController: self.homeController)
-        Constatnt.ManagerApi.fetchStockList(successBlock: { (stocks) in
-            self.delegate.getStocks(result: stocks)
-            self.stockData = stocks
-            self.createFilterModel()
-            self.homeController.hideActivityIndicator(viewController: self.homeController)
-        }, errorBlock: { (error) in
-            self.homeController.hideActivityIndicator(viewController: self.homeController)
-        })
+            Constatnt.ManagerApi.fetchStockList(successBlock: { (stocks) in
+                self.delegate.getStocks(result: stocks)
+                self.stockData = stocks
+                self.createFilterModel()
+                self.homeController.hideActivityIndicator(viewController: self.homeController)
+            }, errorBlock: { (error) in
+                self.homeController.hideActivityIndicator(viewController: self.homeController)
+            })
+        }
+    }
+    
+    func updateStockModel(index:IndexPath) {
+        if self.stockData[index.row].isFavorite != true {
+            let myalert = UIAlertController(title: "Add to Favorite", message: "Are you sure you that you want to add this stock to your favorites?", preferredStyle: UIAlertController.Style.alert)
+            
+            myalert.addAction(UIAlertAction(title: "Accept", style: .default) { (action:UIAlertAction!) in
+                self.stockData[index.row].isFavorite = true
+                self.delegate?.getStocks(result: self.stockData)
+                self.addItem(stock: self.stockData[index.row])
+            })
+            myalert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction!) in
+                print("Cancel")
+            })
+            
+            homeController.present(myalert, animated: true)
         }
     }
     
@@ -81,12 +98,11 @@ class HomeViewModel: NSObject {
                 countryArray.append(stock.country!)
             }
         }
-        self.delegate.getFilte(result: countryArray)
+        self.delegate?.getFilter(result: countryArray)
     }
     
     func updateFavData(){
         fetchItemsFromDB()
-        self.delegate?.updateFavModel(favorite: self.favoriteStocksArr)
     }
     
     
@@ -101,7 +117,6 @@ class HomeViewModel: NSObject {
     
     func addItem(stock:StockModel){
         let item = StockFavoriteModel(context: context)
-//        self.delegate?.updateFavModel(favorite: item)
         item.companyName = stock.companyName
         item.symbom = stock.symbol
         do{
@@ -111,16 +126,27 @@ class HomeViewModel: NSObject {
         }
     }
     
-    func deleteItem(item:StockFavoriteModel) {
-        context.delete(item)
-        do{
-            try context.save()
-        } catch {
-            
-        }
+    func deleteItem(item:IndexPath) {
+        let myalert = UIAlertController(title: "Remove Favorite", message: "Are you sure you that you want to remove this stock from your favorite list?", preferredStyle: UIAlertController.Style.alert)
         
-    }
+        myalert.addAction(UIAlertAction(title: "Accept", style: .default) { (action:UIAlertAction!) in
 
+            self.context.delete(self.favoriteStocksArr[item.row])
+            self.favoriteStocksArr.remove(at: item.row)
+            self.delegate?.getFavoriteStocks(favorite: self.favoriteStocksArr)
+            do{
+                try self.context.save()
+            } catch {
+                
+            }
+        })
+        myalert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction!) in
+            print("Cancel")
+        })
+        
+        homeController.present(myalert, animated: true)
+    }
+    
     func refreshDataWithSearch(string:String){
         var filteredSearchStocks = [StockModel]()
         for data in stockData {
@@ -137,5 +163,9 @@ class HomeViewModel: NSObject {
         vc.selectedStockTickerName = selectedStock
         vc.modalPresentationStyle = .fullScreen
         self.homeController.navigationController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func presentUIalert(){
+        
     }
 }

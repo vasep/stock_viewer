@@ -54,7 +54,7 @@ final class StockDetailsView:UIView {
     }
     
     @objc func doneItemAction(){
-        self.delegate.dismissView()
+        self.delegate?.dismissView()
     }
     
     func setModel(responseNews: [StockNewsModel]){

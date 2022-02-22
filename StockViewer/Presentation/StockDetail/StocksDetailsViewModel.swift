@@ -28,7 +28,7 @@ final class StocksDetailsViewModel: NSObject {
         DispatchQueue.main.async {
             self.stockViewController.showActivityIndicator(viewController: self.stockViewController)
             Constatnt.ManagerApi.fetchStockNews(ticker: ticker, successBlock: { (news) in
-                self.delegate.getStockNews(result: news)
+                self.delegate?.getStockNews(result: news)
                 self.stockViewController.hideActivityIndicator(viewController: self.stockViewController)
             }, errorBlock: { (error) in
                 self.stockViewController.hideActivityIndicator(viewController: self.stockViewController)
