@@ -37,9 +37,18 @@ class HomeViewModel: NSObject {
         DispatchQueue.main.async {
             self.homeController.showActivityIndicator(viewController: self.homeController)
             Constatnt.ManagerApi.fetchStockList(successBlock: { (stocks) in
-                self.delegate.getStocks(result: stocks)
+                self.fetchItemsFromDB()
                 self.stockData = stocks
                 self.createFilterModel()
+                for favStock in self.favoriteStocksArr {
+                    for stock in 0..<self.stockData.count {
+                        if favStock.symbom == self.stockData[stock].symbol{
+                            self.stockData[stock].isFavorite = true
+                        }
+                    }
+                }
+                self.delegate.getStocks(result: self.stockData)
+
                 self.homeController.hideActivityIndicator(viewController: self.homeController)
             }, errorBlock: { (error) in
                 self.homeController.hideActivityIndicator(viewController: self.homeController)

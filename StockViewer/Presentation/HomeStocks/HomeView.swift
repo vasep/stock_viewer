@@ -85,26 +85,26 @@ final class HomeView: UIView,UISearchBarDelegate {
     func setModel(responseStock: [StockModel]){
         self.responseStocks = responseStock
         
-        let myGroup = DispatchGroup()
-        myGroup.notify(queue: .main) {
-            myGroup.enter()
-            for favStock in self.respnseFavoriteStockModel {
-                for stock in 0..<self.responseStocks.count {
-                    if favStock.symbom == self.responseStocks[stock].symbol{
-                        self.responseStocks[stock].isFavorite = true
-                    }
-                }
-            }
-            myGroup.leave()
-        }
-        
-        myGroup.notify(queue: .main) {
-            myGroup.enter()
+//        let myGroup = DispatchGroup()
+//        myGroup.notify(queue: .main) {
+//            myGroup.enter()
+//            for favStock in self.respnseFavoriteStockModel {
+//                for stock in 0..<self.responseStocks.count {
+//                    if favStock.symbom == self.responseStocks[stock].symbol{
+//                        self.responseStocks[stock].isFavorite = true
+//                    }
+//                }
+//            }
+//            myGroup.leave()
+//        }
+//
+//        myGroup.notify(queue: .main) {
+//            myGroup.enter()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-            myGroup.leave()
-        }
+//            myGroup.leave()
+//        }
     }
     
     func setFilterModel(result:[String]){
